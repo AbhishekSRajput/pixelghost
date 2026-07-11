@@ -11,11 +11,7 @@ no PixelGhost account, analytics service, advertising SDK, or
 developer-operated data server. See [PRIVACY.md](PRIVACY.md) for the complete
 behavioral policy.
 
-> **Release status:** this repository is not cleared for public store
-> submission. Resolve every stop-ship item in
-> [docs/PROVENANCE.md](docs/PROVENANCE.md) and
-> [docs/CHROME_WEB_STORE.md](docs/CHROME_WEB_STORE.md) before publishing or
-> making non-infringement or clean-room claims.
+> **Release status:**
 
 ## Features
 
