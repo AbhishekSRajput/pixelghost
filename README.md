@@ -137,8 +137,6 @@ git commit -s -m "Describe the change"
 ## Release documentation
 
 - [Privacy policy](PRIVACY.md)
-- [Chrome Web Store submission runbook](docs/CHROME_WEB_STORE.md)
-- [Internal provenance register](docs/PROVENANCE.md)
 - [Third-party notices](THIRD_PARTY_NOTICES.md)
 
 ## License
