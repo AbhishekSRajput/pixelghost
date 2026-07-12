@@ -49,6 +49,7 @@ script injection.
 
 ## Documentation
 
+- [Support and issue reporting](issues.md)
 - [Privacy policy](PRIVACY.md)
 - [Third-party notices](THIRD_PARTY_NOTICES.md)
 
