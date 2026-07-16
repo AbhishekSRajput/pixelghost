@@ -1,6 +1,6 @@
 # PixelGhost Privacy Policy
 
-- **Effective date:** July 11, 2026
+- **Effective date:** July 16, 2026
 - **Extension operator:** Sagrid, operated by Abhishek Singh
 - **Privacy and support contact:** <codecube99@gmail.com>
 
@@ -38,8 +38,8 @@ features:
 | Current page URL | Associates an autosaved workspace with the page where the user created it. The URL fragment is removed; the scheme, host, path, and query string remain part of the local workspace key. |
 | User-selected overlay images | Displays local files, folder selections, clipboard images, and user-supplied remote images as overlays. Local image bytes and thumbnails may be stored for restoration. |
 | Image and project names | Labels layers and user-created named project snapshots. A local file's name may be used as its layer label. |
-| Overlay state | Restores layer order, selected layer, visibility, lock state, opacity, blend mode, X/Y position, and scale. |
-| Widget and display preferences | Restores widget collapse state, layer-list collapse state, and light/dark theme. The popup's visibility toggle applies live; widget position and hidden state reset on page load. |
+| Overlay state | Restores layer order, selected layer, visibility, lock state, opacity, blend mode, X/Y position, scale, rotation, and centered mode. |
+| Widget and display preferences | Restores widget collapse state, layer-list collapse state, light/dark theme, and accent color. The popup's visibility toggle applies live; widget position and hidden state reset on page load. |
 | Privacy-consent record | Records the policy version, acceptance, and acceptance time so the first-use disclosure is not shown on every popup open. |
 
 PixelGhost does not read or store the text of visited pages, form entries,
@@ -103,9 +103,9 @@ device:
 
 - IndexedDB stores URL-keyed workspaces, local image blobs, thumbnails, and
   named projects.
-- `chrome.storage.local` stores the privacy-consent record and widget/theme
-  preferences.
-- Extension-page `localStorage` stores the popup theme.
+- `chrome.storage.local` stores the privacy-consent record and widget, theme,
+  and accent-color preferences.
+- Extension-page `localStorage` stores the popup theme and accent color.
 
 While an overlay is displayed, temporary image references and controls are
 also rendered in the current page as described above. They are removed when
@@ -157,12 +157,13 @@ send with a support request.
 Workspace data remains in local browser storage until the user removes the
 relevant layers or workspace, clears the extension's stored data, resets the
 browser profile, or uninstalls the extension. Named projects remain until the
-user deletes them or clears extension data. Widget, theme, and consent
-preferences remain until extension storage is cleared or the extension is
-uninstalled.
+user deletes them or clears extension data. Widget, theme, accent-color, and
+consent preferences remain until extension storage is cleared or the
+extension is uninstalled.
 
-Users can remove individual layers, remove all layers for a page, and delete
-named projects from the extension interface. Chrome can remove all remaining
+Users can remove individual layers, remove all layers for a page, delete the
+saved layers of any listed page URL or of all URLs at once, and delete named
+projects from the extension interface. Chrome can remove all remaining
 PixelGhost data when the extension is uninstalled. Users may also clear the
 extension's site/storage data through Chrome's extension developer or browser
 data controls where available.
