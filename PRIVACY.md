@@ -38,8 +38,8 @@ features:
 | Current page URL | Associates an autosaved workspace with the page where the user created it. The URL fragment is removed; the scheme, host, path, and query string remain part of the local workspace key. |
 | User-selected overlay images | Displays local files, folder selections, clipboard images, and user-supplied remote images as overlays. Local image bytes and thumbnails may be stored for restoration. |
 | Image and project names | Labels layers and user-created named project snapshots. A local file's name may be used as its layer label. |
-| Overlay state | Restores layer order, selected layer, visibility, lock state, opacity, blend mode, X/Y position, scale, rotation, and centered mode. |
-| Widget and display preferences | Restores widget collapse state, layer-list collapse state, light/dark theme, and accent color. The popup's visibility toggle applies live; widget position and hidden state reset on page load. |
+| Overlay state | Restores layer order, selected layer, visibility, lock state, opacity, blend mode, X/Y position, scale, rotation, centered mode, and whether the widget was hidden on that page. Hiding the widget applies only to the page it was hidden on, and remains until the user shows the widget, selects a layer, or adds a layer. |
+| Widget and display preferences | Restores widget collapse state, layer-list collapse state, light/dark theme, and accent color, and remembers whether a project has been saved, whether the rotating tips are shown, and whether the first-run guide was skipped, so those hints do not reappear. Widget position resets on page load. |
 | Privacy-consent record | Records the policy version, acceptance, and acceptance time so the first-use disclosure is not shown on every popup open. |
 
 PixelGhost does not read or store the text of visited pages, form entries,
@@ -102,10 +102,12 @@ PixelGhost stores data within the extension's browser storage on the user's
 device:
 
 - IndexedDB stores URL-keyed workspaces, local image blobs, thumbnails, and
-  named projects.
+  named projects. A workspace also records whether the widget was hidden on
+  that page.
 - `chrome.storage.local` stores the privacy-consent record and widget, theme,
   and accent-color preferences.
-- Extension-page `localStorage` stores the popup theme and accent color.
+- Extension-page `localStorage` stores the popup theme, accent color, and
+  whether a project has previously been saved for first-save onboarding.
 
 While an overlay is displayed, temporary image references and controls are
 also rendered in the current page as described above. They are removed when
@@ -157,9 +159,9 @@ send with a support request.
 Workspace data remains in local browser storage until the user removes the
 relevant layers or workspace, clears the extension's stored data, resets the
 browser profile, or uninstalls the extension. Named projects remain until the
-user deletes them or clears extension data. Widget, theme, accent-color, and
-consent preferences remain until extension storage is cleared or the
-extension is uninstalled.
+user deletes them or clears extension data. Widget, theme, accent-color,
+first-save onboarding, and consent preferences remain until extension storage
+is cleared or the extension is uninstalled.
 
 Users can remove individual layers, remove all layers for a page, delete the
 saved layers of any listed page URL or of all URLs at once, and delete named
