@@ -39,7 +39,9 @@ features:
 | User-selected overlay images | Displays local files, folder selections, clipboard images, and user-supplied remote images as overlays. Local image bytes and thumbnails may be stored for restoration. |
 | Image and project names | Labels layers and user-created named project snapshots. A local file's name may be used as its layer label. |
 | Overlay state | Restores layer order, selected layer, visibility, lock state, opacity, blend mode, X/Y position, scale, rotation, centered mode, and whether the widget was hidden on that page. Hiding the widget applies only to the page it was hidden on, and remains until the user shows the widget, selects a layer, or adds a layer. |
-| Widget and display preferences | Restores widget collapse state, layer-list collapse state, light/dark theme, and accent color, and remembers whether a project has been saved, whether the rotating tips are shown, and whether the first-run guide was skipped, so those hints do not reappear. Widget position resets on page load. |
+| Widget and display preferences | Restores widget collapse state, layer-list collapse state, light/dark theme, and accent color, and remembers whether a project has been saved, whether the rotating tips are shown, and whether the first-run guide was skipped, so those hints do not reappear. Widget position and the selected tool reset on page load. |
+| Colors picked with the color picker | Keeps the last twelve colors sampled with the widget's color picker so they can be reused and copied again. Each entry is a color value such as `#2f6df0` — never an image, a screenshot, or the location it was sampled from. The list is stored only on the user's device and is cleared with the extension's other stored data. |
+| Element Selector rules | Keeps the list of CSS selectors used to highlight elements on a page — the ready-made ones chosen from a fixed catalogue built into the extension, and any selector the user typed — so the same checks can be reused on the next page. Only the selector text is stored, never the elements it matched or anything read from a page. The list is stored only on the user's device and is cleared with the extension's other stored data. |
 | Privacy-consent record | Records the policy version, acceptance, and acceptance time so the first-use disclosure is not shown on every popup open. |
 
 PixelGhost does not read or store the text of visited pages, form entries,
@@ -53,6 +55,11 @@ User-selected images and project labels may themselves contain personal or
 sensitive information. PixelGhost processes that content only for the
 user-requested overlay and project features.
 
+The widget's color picker samples a single screen pixel, and only while the
+user has explicitly started a pick. The sampling interface is the browser's own
+color picker; PixelGhost receives the resulting color value and nothing else —
+no screenshot, no surrounding image, and no record of where the pixel was.
+
 ## Clipboard access
 
 PixelGhost can receive an image through an ordinary paste event when the user
@@ -64,6 +71,28 @@ not saved.
 
 The user may decline optional clipboard permission and use file upload,
 folder selection, an HTTPS image URL, or ordinary `Ctrl+V` paste instead.
+
+## Screenshots
+
+PixelGhost's Screenshot tool photographs the page the user is looking at, at
+the moment the user asks it to. A capture is produced inside that browser tab,
+held in memory only for as long as the panel is offering to save or copy it,
+and then discarded. Nothing is captured in the background, on a timer, or
+without a deliberate press.
+
+A capture goes only where the user sends it: to a file the user saves, or to
+the system clipboard the user copies it to. PixelGhost does not retain
+captures, does not store them in the browser, and does not transmit them
+anywhere. There is no capture history and no developer or analytics server to
+receive one.
+
+Two settings decide what a capture contains, and both are the user's:
+**Include overlay layers** decides whether the user's own reference images are
+baked into the picture, and **Pin fixed headers once** decides whether the
+page's fixed elements are shown on every screen of a stitched full-page shot
+or only the first. Producing a full-page capture scrolls the page and briefly
+adjusts the positioning of those fixed elements; both are undone when the
+capture finishes, is cancelled, or is interrupted.
 
 ## Remote image URLs
 
@@ -104,8 +133,14 @@ device:
 - IndexedDB stores URL-keyed workspaces, local image blobs, thumbnails, and
   named projects. A workspace also records whether the widget was hidden on
   that page.
-- `chrome.storage.local` stores the privacy-consent record and widget, theme,
-  and accent-color preferences.
+- `chrome.storage.local` stores the privacy-consent record, widget, theme, and
+  accent-color preferences, the last twelve colors picked with the color
+  picker, which CSS properties the Inspector shows and in what order, and the
+  Element Selector's rule list. The Inspector preference is a list of CSS
+  property names chosen from a fixed catalogue built into the extension; it
+  records nothing read from any page. The Element Selector's rules are CSS
+  selectors — chosen from a fixed catalogue or typed by the user — and record
+  nothing about the elements they matched.
 - Extension-page `localStorage` stores the popup theme, accent color, and
   whether a project has previously been saved for first-save onboarding.
 
@@ -126,7 +161,8 @@ PixelGhost uses handled data only to:
 1. display and control reference-image overlays;
 2. restore the workspace associated with the current page URL;
 3. save, list, load, and delete user-created projects;
-4. remember extension display preferences and consent; and
+4. remember extension display preferences, recently picked colors,
+   Element Selector rules, and consent; and
 5. maintain the security and reliability of those user-facing features.
 
 PixelGhost does not use data for advertising, marketing, analytics,
@@ -190,12 +226,12 @@ URLs only from servers they trust.
 
 ## External services and links
 
-The extension may open its privacy-policy or support page in a normal browser
-tab when the user selects the relevant link. The operator of that website may
-process the visit under its own privacy policy. Chrome Web Store and the
-Chrome browser may separately process installation, update, diagnostic, or
-store activity under Google's policies; that processing is not performed by
-PixelGhost.
+The extension may open its privacy policy, tools guide, or support page in a
+normal browser tab when the user selects the relevant link. The operator of
+that website may process the visit under its own privacy policy. Chrome Web
+Store and the Chrome browser may separately process installation, update,
+diagnostic, or store activity under Google's policies; that processing is not
+performed by PixelGhost.
 
 ## Children
 

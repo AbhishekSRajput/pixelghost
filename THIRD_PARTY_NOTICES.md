@@ -45,7 +45,7 @@ LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
 OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 SOFTWARE.
 
-## React family
+## React and Preact runtimes
 
 The following packages are distributed under the MIT License:
 
@@ -54,8 +54,11 @@ The following packages are distributed under the MIT License:
 | React | 18.3.1 | https://github.com/facebook/react/tree/v18.3.1/packages/react |
 | React DOM | 18.3.1 | https://github.com/facebook/react/tree/v18.3.1/packages/react-dom |
 | Scheduler | 0.23.2 | https://github.com/facebook/react/tree/v18.3.1/packages/scheduler |
+| Preact | 10.29.8 | https://github.com/preactjs/preact/tree/10.29.8 |
 
 Copyright (c) Facebook, Inc. and its affiliates.
+
+Copyright (c) 2015-present Jason Miller
 
 MIT License
 
